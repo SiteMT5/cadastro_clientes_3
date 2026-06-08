@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Design — Cadastro</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ============================================================
+   NAV — flutua sobre todos os blocos
+   ============================================================ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: rgba(15,10,12,0.85);
+  backdrop-filter: blur(14px) saturate(1.5);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.3s;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+.nav-logo span { color: #e8437a; }
+.nav-cta {
+  background: #e8437a;
+  color: #fff;
+  border: none;
+  padding: 0.55rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, transform 0.15s;
+}
+.nav-cta:hover { background: #c0234f; transform: translateY(-1px); }
+
+/* ============================================================
+   REVEAL ANIMATION
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.up { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   BLOCO 1 — HERO (tema imagem 1: rosa vibrante + colagem)
+   ============================================================ */
+#bloco1 {
+  min-height: 100vh;
+  background: #f0246e;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 9rem 5% 6rem;
+}
+
+/* textura halftone sobre o hero */
+#bloco1::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(0,0,0,0.18) 1px, transparent 1px);
+  background-size: 14px 14px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* faixa diagonal decorativa */
+#bloco1::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -60px;
+  width: 420px; height: 420px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.b1-content { position: relative; z-index: 1; max-width: 720px; }
+
+.b1-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f5e84a;
+  color: #0a0a0a;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 4px;
+  margin-bottom: 1.6rem;
+  animation: fadeUp 0.5s ease both;
+}
+
+.b1-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 9vw, 8.5rem);
+  line-height: 0.92;
+  color: #0a0a0a;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.2rem;
+  animation: fadeUp 0.5s 0.08s ease both;
+}
+.b1-heading .italic-line {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(3rem, 7vw, 7rem);
+  color: #fff;
+  display: block;
+}
+
+.b1-sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.92);
+  max-width: 460px;
+  line-height: 1.7;
+  font-weight: 400;
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.5s 0.16s ease both;
+}
+
+.b1-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.5s 0.24s ease both;
+}
+.btn-black {
+  background: #0a0a0a;
+  color: #fff;
+  border: none;
+  padding: 0.95rem 2.2rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-black:hover { background: #1a1a1a; transform: translateY(-2px); }
+.btn-outline-white {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.5);
+  padding: 0.95rem 2.2rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.btn-outline-white:hover { border-color: #fff; transform: translateY(-2px); }
+
+/* post-it decorativo */
+.b1-note {
+  position: absolute;
+  right: 6%;
+  bottom: 10%;
+  width: 220px;
+  background: #f5e84a;
+  padding: 1.4rem 1.2rem;
+  border-radius: 3px;
+  box-shadow: 4px 6px 24px rgba(0,0,0,0.18);
+  transform: rotate(2.5deg);
+  animation: fadeUp 0.5s 0.35s ease both;
+  z-index: 2;
+}
+.b1-note p {
+  font-family: 'Caveat', cursive;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0a0a0a;
+  line-height: 1.4;
+}
+.b1-note small {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: #333;
+}
+
+/* scroll indicator */
+.b1-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: scrollBounce 1.8s ease-in-out infinite;
+}
+.b1-scroll span {
+  display: block;
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.7), transparent);
+  margin: 0 auto;
+}
+@keyframes scrollBounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   BLOCO 2 — COMO FUNCIONA (tema imagem 2: azul royal)
+   ============================================================ */
+#bloco2 {
+  background: #2a3ee8;
+  padding: 7rem 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+#bloco2::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+
+.b2-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 0.7rem;
+}
+.b2-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  color: #fff;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+.b2-title .accent { color: #f5e84a; }
+.b2-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+  max-width: 500px;
+  line-height: 1.7;
+  margin-bottom: 4rem;
+}
+
+.b2-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+}
+
+.b2-step {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 2rem 1.6rem;
+  position: relative;
+  transition: background 0.22s, transform 0.22s, box-shadow 0.22s;
+  opacity: 0;
+  transform: translateY(28px);
+}
+.b2-step.up {
+  animation: riseCard 0.5s ease forwards;
+}
+@keyframes riseCard {
+  to { opacity: 1; transform: translateY(0); }
+}
+.b2-step:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+}
+
+.b2-step-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.4rem;
+  color: #f5e84a;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.b2-step h4 {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.b2-step p {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* balao de pagamento */
+.b2-payment-bubble {
+  margin-top: 3rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.4rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 16px;
+  padding: 1.6rem 2rem;
+  flex-wrap: wrap;
+}
+.b2-bubble-icon {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: #f5e84a;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.b2-bubble-text h5 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.35rem;
+}
+.b2-bubble-text p {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+  line-height: 1.65;
+}
+.b2-bubble-text strong { color: #fff; font-weight: 600; }
+
+/* ============================================================
+   BLOCO 3 — PACOTES (tema imagem 3: creme + colagem moderna)
+   ============================================================ */
+#bloco3 {
+  background: #f5f0e8;
+  padding: 7rem 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+#bloco3::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+}
+
+.b3-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 4rem;
+}
+.b3-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2a3ee8;
+  margin-bottom: 0.5rem;
+}
+.b3-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  color: #0a0a0a;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.b3-title .italic-pink {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  color: #e8437a;
+  font-size: clamp(2.4rem, 4.5vw, 4.4rem);
+}
+.b3-sub {
+  font-size: 0.96rem;
+  color: #555;
+  font-weight: 300;
+  max-width: 520px;
+  line-height: 1.72;
+}
+
+/* tag tracejada estilo imagem 3 */
+.b3-tag {
+  display: inline-block;
+  border: 2px dashed #2a3ee8;
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #2a3ee8;
+  letter-spacing: 0.05em;
+  margin-top: 1rem;
+  background: rgba(42,62,232,0.05);
+}
+
+.b3-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 640px) { .b3-grid { grid-template-columns: 1fr; } }
+
+.pkg-card {
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  padding: 2.4rem 2rem;
+  position: relative;
+  transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  opacity: 0;
+  transform: translateY(28px);
+}
+.pkg-card.up { animation: riseCard 0.5s ease forwards; }
+.pkg-card:hover {
+  border-color: #e8437a;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(232,67,122,0.14);
+}
+.pkg-card.featured { border-color: #e8437a; }
+
+.pkg-badge-b3 {
+  position: absolute;
+  top: -12px; left: 50%;
+  transform: translateX(-50%);
+  background: #e8437a;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 14px;
+  border-radius: 999px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(232,67,122,0.3);
+}
+
+.pkg-qty {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.2rem;
+  color: #e8437a;
+  line-height: 1;
+  margin-bottom: 0.1rem;
+}
+.pkg-qty span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  color: #888;
+  font-weight: 300;
+}
+.pkg-name-b3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  color: #0a0a0a;
+  margin-bottom: 0.4rem;
+}
+.pkg-desc-b3 {
+  font-size: 0.84rem;
+  color: #777;
+  line-height: 1.62;
+  margin-bottom: 1.3rem;
+  font-weight: 300;
+}
+
+.pkg-divider { border: none; border-top: 1px solid #eee; margin: 1.2rem 0; }
+
+.price-main-b3 { font-size: 2.1rem; font-weight: 700; color: #0a0a0a; display: inline; }
+.price-per-b3 { font-size: 0.82rem; color: #888; font-weight: 300; margin-left: 4px; }
+
+/* tags de contrato */
+.contract-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0.9rem 0 1.2rem; }
+.ctag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.ctag-blue {
+  background: rgba(42,62,232,0.08);
+  color: #2a3ee8;
+  border: 1px solid rgba(42,62,232,0.2);
+}
+.ctag-pink {
+  background: rgba(232,67,122,0.08);
+  color: #e8437a;
+  border: 1px solid rgba(232,67,122,0.2);
+}
+
+.feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 0.84rem;
+  color: #555;
+  font-weight: 300;
+  line-height: 1.5;
+}
+.feature-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 16px; height: 16px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: rgba(232,67,122,0.12);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 8l3 3 5-5' stroke='%23e8437a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: contain;
+}
+
+.discount-box {
+  margin-top: 1.2rem;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  background: rgba(42,62,232,0.06);
+  border: 1.5px dashed rgba(42,62,232,0.25);
+  font-size: 0.8rem;
+  color: #2a3ee8;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   BLOCO 4 — FORMULÁRIO (tema imagem 5: rosa vibrante / editorial)
+   ============================================================ */
+#bloco4 {
+  background: #e8186e;
+  padding: 7rem 5% 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* crinkle paper texture via halftone + ruído */
+#bloco4::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 18px 18px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* faixa diagonal decorativa */
+#bloco4::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 320px 320px 0;
+  border-color: transparent rgba(255,255,255,0.07) transparent transparent;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.b4-inner { position: relative; z-index: 1; }
+
+/* header editorial */
+.b4-meta-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.b4-meta-bar .sep { color: rgba(255,255,255,0.3); }
+
+/* número de seção estilo badge */
+.b4-section-badge {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 auto 1.2rem;
+}
+
+/* tag recortada — estilo lacre de papel */
+.b4-tag-shape {
+  display: inline-block;
+  background: #f5f0e8;
+  color: #0a0a0a;
+  font-family: 'Caveat', cursive;
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 0.7rem 1.8rem 0.7rem 2rem;
+  clip-path: polygon(0 10%, 4% 0, 96% 0, 100% 10%, 100% 90%, 96% 100%, 4% 100%, 0 90%);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.b4-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 0.6rem;
+}
+.b4-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.6rem, 4.5vw, 4.5rem);
+  color: #fff;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.b4-title .accent-cream { color: #f5f0e8; }
+.b4-sub {
+  font-size: 0.96rem;
+  color: rgba(255,255,255,0.75);
+  font-weight: 400;
+  max-width: 500px;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+/* form — fundo creme/papel */
+.form-wrap {
+  max-width: 680px;
+  background: #f5f0e8;
+  border: none;
+  border-radius: 6px;
+  padding: 3rem 2.5rem;
+  box-shadow: 6px 8px 0 rgba(0,0,0,0.18);
+}
+@media (max-width: 600px) { .form-wrap { padding: 1.8rem 1.2rem; } }
+
+.form-section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+@media (max-width: 540px) { .form-grid { grid-template-columns: 1fr; } }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field.full { grid-column: 1 / -1; }
+.field label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #888;
+  text-transform: uppercase;
+}
+.field input,
+.field textarea {
+  border: none;
+  border-bottom: 2px solid #d0c8c0;
+  border-radius: 0;
+  padding: 0.72rem 0.2rem;
+  font-size: 0.92rem;
+  font-family: 'Space Grotesk', sans-serif;
+  background: transparent;
+  color: #0a0a0a;
+  outline: none;
+  transition: border-color 0.2s;
+  font-weight: 400;
+}
+.field input::placeholder,
+.field textarea::placeholder { color: #bbb; }
+.field input:focus,
+.field textarea:focus {
+  border-bottom-color: #e8186e;
+}
+.field textarea {
+  min-height: 100px;
+  resize: vertical;
+  border: 1.5px solid #d0c8c0;
+  border-radius: 4px;
+  padding: 0.72rem 0.8rem;
+}
+.field textarea:focus { border-color: #e8186e; }
+
+.form-divider {
+  border: none;
+  border-top: 1px solid #e0d8d0;
+  margin: 1.8rem 0;
+}
+
+/* pkg options — estilo creme */
+.pkg-opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+@media (max-width: 540px) { .pkg-opts { grid-template-columns: 1fr; } }
+
+.pkg-opt {
+  border: 2px solid #d0c8c0;
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.15s, background 0.15s;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.06);
+}
+.pkg-opt:hover { border-color: #e8186e; }
+.pkg-opt.active {
+  border: 2px solid #e8186e;
+  background: rgba(232,24,110,0.04);
+}
+
+.radio-ring {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.15s;
+}
+.pkg-opt.active .radio-ring { border-color: #e8186e; }
+.radio-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #e8186e;
+  display: none;
+}
+.pkg-opt.active .radio-dot { display: block; }
+
+.opt-name { font-size: 0.87rem; font-weight: 700; color: #0a0a0a; }
+.opt-price { font-size: 0.76rem; color: #888; font-weight: 400; }
+
+/* total bar */
+.total-bar {
+  background: #0a0a0a;
+  border: none;
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.18);
+}
+.total-bar p { font-size: 0.82rem; color: rgba(255,255,255,0.45); font-weight: 300; }
+.total-bar strong { font-size: 1.1rem; color: #fff; font-weight: 700; }
+
+/* waitlist */
+.wl-row {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  background: #fff;
+  border: 2px solid #d0c8c0;
+  border-radius: 6px;
+  margin-bottom: 1.4rem;
+  cursor: pointer;
+  user-select: none;
+}
+.wl-row.visible { display: flex; }
+.wl-left { display: flex; align-items: center; gap: 10px; }
+.wl-icon-circle {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(232,24,110,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: #e8186e;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+.wl-label p { font-size: 0.87rem; font-weight: 600; color: #0a0a0a; }
+.wl-label small { font-size: 0.75rem; color: #888; font-weight: 400; }
+.toggle-sw {
+  width: 44px; height: 24px;
+  border-radius: 12px;
+  background: #d0c8c0;
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.toggle-sw.on { background: #e8186e; }
+.toggle-sw::after {
+  content: '';
+  position: absolute;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  top: 3px; left: 3px;
+  transition: left 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.22);
+}
+.toggle-sw.on::after { left: 23px; }
+
+/* submit */
+.submit-btn {
+  width: 100%;
+  background: #e8186e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 1.1rem;
+  font-size: 0.9rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.22);
+}
+.submit-btn:hover {
+  background: #b8005a;
+  transform: translateY(-1px);
+}
+.submit-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.form-note {
+  text-align: center;
+  font-size: 0.74rem;
+  color: #aaa;
+  margin-top: 0.9rem;
+  font-weight: 400;
+}
+
+/* sucesso */
+.success-screen {
+  display: none;
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+.success-icon {
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  animation: popIn 0.4s cubic-bezier(.17,.67,.34,1.3) both;
+  background: rgba(72,187,120,0.15);
+  border: 2px solid rgba(72,187,120,0.4);
+  color: #1f8a4e;
+}
+@keyframes popIn {
+  from { transform: scale(0.4); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.success-screen h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.55rem;
+  color: #0a0a0a;
+  margin-bottom: 0.55rem;
+}
+.success-screen p { font-size: 0.92rem; color: #555; font-weight: 400; line-height: 1.72; }
+.success-screen strong { color: #0a0a0a; font-weight: 700; }
+.success-wpp {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 1.4rem;
+  background: rgba(37,211,102,0.1);
+  border: 1.5px solid rgba(37,211,102,0.3);
+  color: #1a8c42;
+  padding: 0.65rem 1.3rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+/* ============================================================
+   FOOTER
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 2rem 5%;
+  text-align: center;
+  font-size: 0.76rem;
+  color: rgba(255,255,255,0.2);
+  font-weight: 300;
+}
+
+/* ============================================================
+   UTILITARIOS
+   ============================================================ */
+.container { max-width: 1100px; margin: 0 auto; }
+
+@media (max-width: 480px) {
+  nav { padding: 0.9rem 1.2rem; }
+  #bloco1 { padding: 7rem 5% 5rem; }
+  .b1-note { display: none; }
+  #bloco2, #bloco3, #bloco4 { padding: 5rem 5%; }
+}
+
+/* capivara de sucesso */
+.capi-img {
+  width: 320px;
+  max-width: 95%;
+  height: auto;
+  display: block;
+  margin: 0 auto 1.2rem;
+  animation: capiEntrada 0.6s 0.3s cubic-bezier(.17,.67,.34,1.3) both;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.20));
+}
+@keyframes capiEntrada {
+  from { transform: scale(0.3) rotate(-8deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- ====== NAV ====== -->
+<nav>
+  <div class="nav-logo">social<span>studio</span></div>
+  <a href="#bloco4" class="nav-cta">Quero contratar</a>
+</nav>
+
+
+<!-- ====================================================
+     BLOCO 1 — HERO (rosa vibrante / estilo imagem 1)
+     ==================================================== -->
+<section id="bloco1">
+  <div class="b1-content">
+    <div class="b1-pill">Design de carrosséis com estratégia</div>
+
+    <h1 class="b1-heading">
+      Presença digital<br>
+      <span class="italic-line">de verdade.</span>
+    </h1>
+
+    <p class="b1-sub">
+      Carrosséis pensados com roteiro estratégico para marcas que querem conteudo com proposito — criado do zero, pronto para publicar.
+    </p>
+
+    <div class="b1-btns">
+      <a href="#bloco4" class="btn-black">Quero começar</a>
+      <a href="#bloco3" class="btn-outline-white">Ver pacotes</a>
+    </div>
+  </div>
+
+  <div class="b1-note">
+    <p>Carrosséis pensados com roteiro estratégico para marcas que querem presença digital de verdade</p>
+    <small>Identidade visual consistente. Entrega via Google Drive.</small>
+  </div>
+
+  <div class="b1-scroll">
+    <span></span>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     BLOCO 2 — COMO FUNCIONA (azul royal / estilo imagem 2)
+     ==================================================== -->
+<section id="bloco2">
+  <div class="container">
+    <div class="reveal">
+      <div class="b2-eyebrow">Como funciona</div>
+      <div class="b2-title">DO BRIEFING<br>A <span class="accent">ENTREGA</span></div>
+      <div class="b2-sub">Cada pacote segue um processo estruturado para garantir que o conteudo esteja alinhado com a sua marca antes de qualquer produção começar.</div>
+    </div>
+
+    <div class="b2-steps">
+      <div class="b2-step">
+        <span class="b2-step-num">01</span>
+        <h4>Cadastro e briefing</h4>
+        <p>Você preenche o formulário com informações da sua marca, nicho e objetivos. Esse briefing guia toda a produção.</p>
+      </div>
+      <div class="b2-step">
+        <span class="b2-step-num">02</span>
+        <h4>Alinhamento por contato</h4>
+        <p>Entro em contato para tirar todas as dúvidas, aprofundar o briefing e alinhar expectativas antes de qualquer coisa.</p>
+      </div>
+      <div class="b2-step">
+        <span class="b2-step-num">03</span>
+        <h4>Roteiro e esboço visual</h4>
+        <p>Envio o roteiro completo de cada carrossel com um esboço da arte — paleta de cores, fontes e elementos — para sua aprovação.</p>
+      </div>
+      <div class="b2-step">
+        <span class="b2-step-num">04</span>
+        <h4>Aprovacao e pagamento</h4>
+        <p>Com o roteiro aprovado, o pagamento é realizado antes da produção começar. Aceito Pix e cartão de crédito via link.</p>
+      </div>
+      <div class="b2-step">
+        <span class="b2-step-num">05</span>
+        <h4>Entrega via Google Drive</h4>
+        <p>As peças finalizadas são enviadas por link no Google Drive — prontas para baixar e publicar diretamente.</p>
+      </div>
+    </div>
+
+    <div class="b2-payment-bubble reveal">
+      <div class="b2-bubble-icon">💳</div>
+      <div class="b2-bubble-text">
+        <h5>Formas de pagamento aceitas</h5>
+        <p>O pagamento é realizado <strong>antes</strong> do início da produção. Aceito <strong>Pix</strong> e <strong>cartão de crédito</strong> via link de pagamento (com acréscimo da taxa da maquininha).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     BLOCO 3 — PACOTES (creme / estilo imagem 3)
+     ==================================================== -->
+<section id="bloco3">
+  <div class="container">
+    <div class="b3-header reveal">
+      <div class="b3-eyebrow">Pacotes</div>
+      <div class="b3-title">ESCOLHA SEU <span class="italic-pink">plano</span></div>
+      <p class="b3-sub">No primeiro mês, sem contrato — você testa, aprova e decide. A partir da segunda compra, fechamos um contrato de 3 meses.</p>
+      <div class="b3-tag">Primeiro mês sem compromisso</div>
+    </div>
+
+    <div class="b3-grid">
+
+      <!-- ESSENCIAL -->
+      <div class="pkg-card reveal">
+        <div class="pkg-qty">4 <span>carrosséis / mês</span></div>
+        <div class="pkg-name-b3">Pacote Essencial</div>
+        <p class="pkg-desc-b3">Ideal para marcas que estao comecando a investir em conteudo estrategico e querem consistencia sem sobrecarregar.</p>
+        <hr class="pkg-divider">
+
+        <span class="price-main-b3">R$ 390</span>
+        <span class="price-per-b3">/ mes</span>
+
+        <div class="contract-tags">
+          <span class="ctag ctag-blue">1.º mês sem contrato</span>
+          <span class="ctag ctag-pink">Renovação: 3 meses</span>
+        </div>
+
+        <ul class="feature-list">
+          <li>4 carrosséis mensais com design completo</li>
+          <li>Roteiro estratégico incluso em cada peça</li>
+          <li>Esboço visual para aprovação prévia</li>
+          <li>Identidade visual consistente</li>
+          <li>Entrega via link no Google Drive</li>
+          <li>Pagamento antecipado à produção</li>
+        </ul>
+
+        <div class="discount-box">
+          Renovou? Pague os 3 meses à vista por <strong>R$ 1.000</strong> e economize R$ 170.
+        </div>
+      </div>
+
+      <!-- PROFISSIONAL -->
+      <div class="pkg-card featured reveal">
+        <div class="pkg-badge-b3">Mais completo</div>
+        <div class="pkg-qty">8 <span>carrosséis / mês</span></div>
+        <div class="pkg-name-b3">Pacote Profissional</div>
+        <p class="pkg-desc-b3">Para marcas que querem presença mais ativa e constante no feed, com maior volume de conteudo estrategico por mes.</p>
+        <hr class="pkg-divider">
+
+        <span class="price-main-b3">R$ 690</span>
+        <span class="price-per-b3">/ mes</span>
+
+        <div class="contract-tags">
+          <span class="ctag ctag-blue">1.º mês sem contrato</span>
+          <span class="ctag ctag-pink">Renovação: 3 meses</span>
+        </div>
+
+        <ul class="feature-list">
+          <li>8 carrosséis mensais com design completo</li>
+          <li>Roteiro estratégico incluso em cada peça</li>
+          <li>Esboço visual para aprovação prévia</li>
+          <li>Identidade visual consistente</li>
+          <li>Entrega via link no Google Drive</li>
+          <li>Pagamento antecipado à produção</li>
+          <li>Volume ideal para crescimento acelerado</li>
+        </ul>
+
+        <div class="discount-box">
+          Renovou? Pague os 3 meses à vista por <strong>R$ 1.800</strong> e economize R$ 170.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================================================
+     BLOCO 4 — FORMULÁRIO (rosa editorial / estilo imagem 5)
+     ==================================================== -->
+<section id="bloco4">
+  <div class="container b4-inner">
+
+    <!-- barra editorial topo -->
+    <div class="b4-meta-bar reveal">
+      <span>@socialstudio</span>
+      <span class="sep">//</span>
+      <span>Cadastro</span>
+    </div>
+
+    <!-- badge de número de seção + tag recortada -->
+    <div class="reveal" style="text-align:center; margin-bottom: 1.5rem;">
+      <div class="b4-section-badge">04</div>
+      <div class="b4-tag-shape">Vamos<br>começar</div>
+    </div>
+
+    <div class="reveal">
+      <div class="b4-eyebrow">Cadastro</div>
+      <div class="b4-title">PREENCHA O <span class="accent-cream">FORMULÁRIO</span></div>
+      <p class="b4-sub">Entrarei em contato para confirmar disponibilidade e alinhar os próximos passos.</p>
+    </div>
+
+    <div class="form-wrap reveal">
+      <div id="formBody">
+        <div class="form-section-label">Seus dados</div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="fname">Nome completo</label>
+            <input type="text" id="fname" placeholder="Seu nome">
+          </div>
+          <div class="field">
+            <label for="fphone">WhatsApp</label>
+            <input type="tel" id="fphone" placeholder="(22) 99999-9999">
+          </div>
+          <div class="field">
+            <label for="femail">E-mail</label>
+            <input type="email" id="femail" placeholder="seu@email.com">
+          </div>
+          <div class="field">
+            <label for="finsta">Instagram ou site</label>
+            <input type="text" id="finsta" placeholder="@suamarca">
+          </div>
+          <div class="field">
+            <label for="fniche">Nicho / segmento</label>
+            <input type="text" id="fniche" placeholder="Ex: moda, saúde, educação">
+          </div>
+          <div class="field full">
+            <label for="fmsg">Fale um pouco sobre sua marca</label>
+            <textarea id="fmsg" placeholder="O que você vende? Qual público quer atingir? Qual é o maior desafio atual?"></textarea>
+          </div>
+        </div>
+
+        <hr class="form-divider">
+        <div class="form-section-label">Escolha seu pacote</div>
+
+        <div class="pkg-opts">
+          <div class="pkg-opt active" id="opt4" onclick="selectPkg(4)">
+            <div class="radio-ring"><div class="radio-dot"></div></div>
+            <div>
+              <div class="opt-name">Essencial</div>
+              <div class="opt-price">4 carrosséis — R$ 390/mês</div>
+            </div>
+          </div>
+          <div class="pkg-opt" id="opt8" onclick="selectPkg(8)">
+            <div class="radio-ring"><div class="radio-dot"></div></div>
+            <div>
+              <div class="opt-name">Profissional</div>
+              <div class="opt-price">8 carrosséis — R$ 690/mês</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="total-bar">
+          <p>Investimento mensal</p>
+          <strong id="totalDisplay">R$ 390</strong>
+        </div>
+
+        <div class="wl-row" id="wlRow" onclick="toggleWaitlist()">
+          <div class="wl-left">
+            <div class="wl-icon-circle">&#9203;</div>
+            <div class="wl-label">
+              <p>Entrar na lista de espera</p>
+              <small>Vagas indisponíveis. Avise-me quando abrir.</small>
+            </div>
+          </div>
+          <div class="toggle-sw" id="wlPill"></div>
+        </div>
+
+        <button class="submit-btn" id="submitBtn" onclick="submitForm()">Solicitar contratação</button>
+        <p class="form-note">Seus dados são utilizados apenas para contato e nunca são compartilhados.</p>
+      </div>
+
+      <div class="success-screen" id="successScreen">
+        <div class="success-icon">&#10003;</div>
+<img src="capivara.png"
+     alt="Capivara comemorando"
+     class="capi-img">        <h3 id="successTitle">Cadastro enviado com sucesso!</h3>
+        <p id="successMsg">Recebi suas informações. Entrarei em contato com você <strong>pelo WhatsApp</strong> em breve para alinharmos os próximos passos.</p>
+        <div class="success-wpp">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Retorno pelo WhatsApp — deixe o app aberto.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====== FOOTER ====== -->
+<!-- ====== FOOTER ====== -->
+<footer>
+  <p>Todos os direitos reservados. Primeiro mês sem contrato. A partir da renovação, contrato trimestral. Atendimento mediante disponibilidade.</p>
+</footer>
+
+
+<script>
+  // ======== SCROLL REVEAL ========
+  var allReveal = document.querySelectorAll('.reveal, .b2-step, .pkg-card');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e, i) {
+      if (e.isIntersecting) {
+        setTimeout(function() { e.target.classList.add('up'); }, i * 95);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  allReveal.forEach(function(el) { obs.observe(el); });
+
+  // ======== FORM LOGIC ========
+  var WAITLIST_ENABLED = false;
+  var selectedPkg = 4;
+  var waitlistOn = false;
+  var prices = { 4: 390, 8: 690 };
+
+  if (WAITLIST_ENABLED) {
+    document.getElementById('wlRow').classList.add('visible');
+  }
+
+  function selectPkg(n) {
+    selectedPkg = n;
+    document.getElementById('opt4').classList.toggle('active', n === 4);
+    document.getElementById('opt8').classList.toggle('active', n === 8);
+    document.getElementById('totalDisplay').textContent =
+      'R$ ' + prices[n].toLocaleString('pt-BR');
+  }
+
+  function toggleWaitlist() {
+    waitlistOn = !waitlistOn;
+    document.getElementById('wlPill').classList.toggle('on', waitlistOn);
+    document.getElementById('submitBtn').textContent = waitlistOn
+      ? 'Entrar na lista de espera'
+      : 'Solicitar contratação';
+  }
+
+  <!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init({
+  publicKey: "2WgIVuTD_CEadSqfk"
+});
+
+console.log("EmailJS carregado com sucesso");
+
+function submitForm() {
+
+    console.log("Botão clicado");
+
+  const nome = document.getElementById('fname').value;
+
+  const nome = document.getElementById('fname').value;
+  const telefone = document.getElementById('fphone').value;
+  const email = document.getElementById('femail').value;
+  const instagram = document.getElementById('finsta').value;
+  const nicho = document.getElementById('fniche').value;
+  const mensagem = document.getElementById('fmsg').value;
+
+  emailjs.send(
+    "service_gf9pbkg",
+    "template_nlx4hhd",
+    {
+      nome: nome,
+      telefone: telefone,
+      email: email,
+      instagram: instagram,
+      nicho: nicho,
+      mensagem: mensagem
+    }
+  )
+  .then(function(response) {
+      console.log("SUCESSO:", response);
+
+      document.getElementById("formBody").style.display = "none";
+      document.getElementById("successScreen").style.display = "block";
+  })
+  .catch(function(error) {
+      console.error("ERRO COMPLETO:", error);
+      alert("Erro: " + JSON.stringify(error));
+  });
+}
+</script>
+
+</body>
+</html>
